@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <h1>Vue Webble plugin</h1>
+  </div>
 </template>
 
 <script>

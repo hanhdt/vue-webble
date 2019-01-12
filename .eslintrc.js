@@ -1,16 +1,19 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+    parser: 'babel-eslint',
+    sourceType: 'module',
+    ecmaVersion: 2017
   },
   extends: [
-    "plugin:vue/essential",
-    "@vue/standard"
+    "plugin:vue/strongly-recommended"
   ],
   env: {
     browser: true,
   },
+  plugins: [
+    "vue"
+  ],
   // custom rules here
   rules: {
     // allow paren-less arrow functions
