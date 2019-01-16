@@ -39,58 +39,67 @@ export default {
   mounted() {
   },
   methods: {
-    requestDevice() {
+    // Scan devices
+    async requestDevice() {
       // Reset scanned devices
       this.scannedDevices = []
 
       switch (this.filterType) {
         case 'all':
-          navigator.bluetooth.requestDevice({
-            acceptAllDevices: true,
-            optionalServices: this.services
-          })
-          .then(device => { 
+          try {
+            const device = await navigator.bluetooth.requestDevice({
+              acceptAllDevices: true,
+              optionalServices: this.services
+            })
             this.scannedDevices.push(device)
-          })
-          .catch(error => { 
+          } catch(error) { 
             console.log(error)
-          })
+          }
           break
         case 'services':
-          navigator.bluetooth.requestDevice({ 
-            filters: [{ 
-              services: this.services
-            }] 
-          })
-          .then(device => { 
+          try {
+            const device = await navigator.bluetooth.requestDevice({
+              filters: [{ 
+                services: this.services
+              }]
+            })
             this.scannedDevices.push(device)
-          })
-          .catch(error => { console.log(error) })
+          } catch(error) {
+            console.log(error)
+          }
+          break
         case 'name':
-          navigator.bluetooth.requestDevice({
-            filters: [{
-              name: this.name
-            }],
-            optionalServices: this.services
-          })
-          .then(device => { 
+          try {
+            const device = await navigator.bluetooth.requestDevice({
+              filters: [{ 
+                name: this.name
+              }]
+            })
             this.scannedDevices.push(device)
-          })
-          .catch(error => { console.log(error) })
+          } catch(error) {
+            console.log(error)
+          }
+          break
         default:
           break
       }
     },
-    connectDevice(device) {
+    async connectDevice(device) {
       if (!this.connectedDevices.includes(device)) {
-        // TODO: connect the device
+        this.connectedDevices.push(device)
       }
+      // Connect the device
+      const server = await device.gatt.connect()
+      return server
     },
-    disconnectDevice(device) {
-      if (this.connectedDevices.includes(device)) {
-        // TODO: disconnect the device
+    async disconnectDevice(device) {
+      if (this.connectedDevices.includes(device)
+        && device.gatt.connected) {
+        // Disconnect the device
+        await device.gatt.disconnect()
+        this.connectedDevices.splice(this.connectedDevices.indexOf(device), 1)
       } else {
-        // TODO: disconnect all the devices
+        console.log('> Bluetooth Device is already disconnected');
       }
     }
   },
@@ -108,4 +117,5 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import url('../design/index.scss');
 </style>
