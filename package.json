@@ -9,7 +9,7 @@
     "./sfc": "src/components/VueWebble.vue"
   },
   "files": [
-    "example/*",
+    "sample/*",
     "dist/*",
     "src/*",
     "*.json",
@@ -36,10 +36,11 @@
     "javascript"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve ./sample/src/main.js --open",
+    "dev": "vue-cli-service serve ./sample/src/main.js --open",
     "build": "vue-cli-service build --target lib --name vue-webble ./src/index.js",
     "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-webble.esm.js",
     "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-webble.min.js",
+    "build:sample": "vue-cli-service build ./sample/src/main.js",
     "lint": "vue-cli-service lint",
     "test:unit": "jest --clearCache && vue-cli-service test:unit"
   },
@@ -47,19 +48,20 @@
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-eslint": "^3.1.5",
     "@vue/cli-plugin-unit-jest": "^3.3.0",
-    "@vue/cli-service": "^3.1.4",
+    "@vue/cli-service": "^3.3.1",
     "babel-core": "~7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.12.1",
     "eslint-plugin-vue": "^5.0.0",
     "identity-obj-proxy": "^3.0.0",
     "node-sass": "^4.11.0",
-    "rollup": "^1.0.0",
-    "rollup-plugin-babel": "^4.2.0",
+    "rollup": "^1.1.2",
+    "rollup-plugin-async": "^1.2.0",
+    "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-buble": "^0.19.6",
     "rollup-plugin-sass": "^0.9.3",
-    "rollup-plugin-vue": "^4.3.2",
+    "rollup-plugin-vue": "^4.6.2",
     "sass-loader": "^7.0.1",
     "vue": "^2.5.21",
     "vue-template-compiler": "^2.5.21"

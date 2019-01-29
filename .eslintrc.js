@@ -9,7 +9,7 @@ module.exports = {
     "plugin:vue/strongly-recommended"
   ],
   env: {
-    browser: true,
+    node: true,
   },
   plugins: [
     "vue"

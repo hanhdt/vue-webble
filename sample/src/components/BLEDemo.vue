@@ -5,8 +5,12 @@
 </template>
 
 <script>
+import VueWebble from '../../../src/components/VueWebble'
 export default {
   name: 'BLEDemo',
+  components: {
+    VueWebble
+  }
 }
 </script>
 
