@@ -1,7 +1,6 @@
 import vue from 'rollup-plugin-vue'
 import buble from 'rollup-plugin-buble'
 import async from 'rollup-plugin-async'
-import babel from 'rollup-plugin-babel'
 
 export default [
   {
@@ -18,11 +17,7 @@ export default [
         compileTemplate: true
       }),
       buble(),
-      async(),
-      babel({
-        runtimeHelpers: true,
-        exclude: 'node_modules/**' // only transpile our source code
-      })
+      async()
     ]
   },
   // Browser build.
@@ -40,11 +35,7 @@ export default [
         compileTemplate: true
       }),
       buble(),
-      async(),
-      babel({
-        runtimeHelpers: true,
-        exclude: 'node_modules/**' // only transpile our source code
-      })
+      async()
     ]
   }
 ]
