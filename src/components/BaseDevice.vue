@@ -1,18 +1,31 @@
 <template>
   <div>
     <div class="device-item">
-      <div class="device__name">Device 1 - 3G</div>
+      <div class="device__name">
+        Device 1 - 3G
+      </div>
       <div class="device__btn">
-        <button class="btn__connect">Connect</button>
+        <button class="btn__connect">
+          Connect
+        </button>
       </div>
     </div>
     <div class="device-item">
-        <div class="device__name">Device 2 - 4G</div>
-        <div class="device__btn">
-          <button class="btn__info"><img src="../images/info-ic.svg" alt=""></button>
-          <button class="btn__disconnect">Disconnect</button>
-        </div>
+      <div class="device__name">
+        Device 2 - 4G
       </div>
+      <div class="device__btn">
+        <button class="btn__info">
+          <img
+            src="../images/info-ic.svg"
+            alt=""
+          >
+        </button>
+        <button :class="$style.btn__disconnect">
+          Disconnect
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.btn__disconnect {
+  .btn__disconnect {
     display: inline-block;
     border: none;
     border-radius: 30px;

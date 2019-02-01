@@ -1,21 +1,21 @@
 <template>
   <div>
     <h1>Vue Webble plugin</h1>
-    <SwitchButton/>
+    <BaseSwitch />
     <h2>Connected devices</h2>
-    <BaseDevice/>
+    <BaseDevice />
     <h2>Available devices</h2>
-    <BaseDevice/>
+    <BaseDevice />
   </div>
 </template>
 
 <script>
-import SwitchButton from './SwitchButton.vue'
+import BaseSwitch from './BaseSwitch.vue'
 import BaseDevice from './BaseDevice.vue'
 export default {
   name: 'VueWebble',
   components: {
-    SwitchButton,
+    BaseSwitch,
     BaseDevice
   },
   props: {

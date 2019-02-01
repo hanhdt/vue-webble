@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'ModalInfo',
+  name: 'DeviceModal',
 }
 </script>
 

@@ -1,14 +1,15 @@
 <template>
   <div>
-    <button>Switch button on/off</button>
+    <h1>Connected devices</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SwitchButton',
+  name: 'ConnectedDevices',
 }
 </script>
 
 <style lang="scss" module>
+@import url('../design/index.scss');
 </style>
