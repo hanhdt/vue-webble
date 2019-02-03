@@ -1,13 +1,17 @@
-<template id="switch-button">
-  <div :class="$style['switch-button-control']">
+<template>
+  <div :class="$style.switch__button__control">
     <div
-      :class="[{enabled: isEnabled}, $style.switch-button]"
-      @click="toggle"
+      :class="[$style.switch__button, (isEnabled ? $style.enabled : '')]"
       :style="{'--color': color}"
+      @click="toggle"
     >
-      <div :class="$style['button']" />
+      <div
+        :class="$style.button"
+      />
     </div>
-    <div :class="$style['switch-button-label']">
+    <div
+      :class="$style.switch__button__label"
+    >
       <slot />
     </div>
   </div>
@@ -16,13 +20,15 @@
 <script>
 export default {
 	name: 'BaseSwitch',
-	template: "#switch-button",
   model: {
     prop: "isEnabled",
     event: "toggle"
   },
   props: {
-    isEnabled: Boolean,
+    isEnabled: {
+      type: Boolean,
+      required: true
+    },
     color: {
       type: String,
       required: false,
@@ -39,12 +45,12 @@ export default {
 
 <style lang="scss" module>
 // For switch-button styling
-.switch-button-control {
+.switch__button__control {
   display: flex;
   flex-direction: row;
   align-items: center;
   
-  .switch-button {
+  .switch__button {
     $switch-button-height: 1.6em;
     $switch-button-color: var(--color);
     $switch-button-border-thickness: 2px;
@@ -89,7 +95,7 @@ export default {
     }
   }
 
-  .switch-button-label {
+  .switch__button__label {
     margin-left: 10px;
   }
 }

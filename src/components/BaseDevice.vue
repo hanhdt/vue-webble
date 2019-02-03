@@ -1,11 +1,17 @@
 <template>
-  <div :class="$style['device__list']">
-    <div :class="$style['device__item']">
-      <div :class="$style['device__name']">
+  <div :class="$style.device__list">
+    <div :class="$style.device__item">
+      <div :class="$style.device__name">
         Device 1 - 3G
       </div>
-      <div :class="$style['device__btn']">
-        <button :class="$style['btn__info']">
+      <div
+        v-if="isConnected"
+        :class="$style.device__btn"
+      >
+        <button
+          :class="$style.btn__info"
+          @click="showDeviceInfo = true"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -26,7 +32,8 @@
               stroke-linecap="round"
               stroke-miterlimit="10"
               stroke-width="2"
-            /><rect
+            />
+            <rect
               fill="none"
               height="50"
               width="50"
@@ -35,26 +42,45 @@
           </svg>
         </button>
         <button :class="$style.btn__disconnect">
+          Disconnect
+        </button>
+      </div>
+      <div
+        v-else
+        :class="$style.device__btn"
+      >
+        <button :class="$style.btn__connect">
           Connect
         </button>
       </div>
     </div>
-    <div :class="$style['device__item']">
-      <div :class="$style['device__name']">
-        Device 2 - 4G
-      </div>
-      <div :class="$style['device__btn']">
-        <button :class="$style.btn__connect">
-          Disconnect
-        </button>
-      </div>
-    </div>
+    <!-- use the modal component, pass in the prop -->
+    <base-modal
+      v-show="showDeviceInfo"
+      @close="showDeviceInfo = false"
+    />
   </div>
 </template>
 
 <script>
+import BaseModal from './BaseModal.vue'
+
 export default {
+  components: {
+    BaseModal
+  },
   name: 'BaseDevice',
+  props: {
+    isConnected: {
+      type: Boolean,
+      required: true
+    }
+  },
+  data () {
+    return {
+      showDeviceInfo: false
+    }
+  }
 }
 </script>
 

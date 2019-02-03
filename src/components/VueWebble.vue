@@ -1,119 +1,39 @@
 <template>
-  <!-- :class="$style['class']" -->
-  <div :class="$style['webble__container']">
+  <div :class="$style.webble__container">
     <h1>Vue Webble plugin</h1>
-    <div :class="$style['webble__header']">
+    <div :class="$style.webble__header">
       <div :class="$style['webble__header--left']">
         <h2>Bluetooth devices</h2>
         <div>You have to be connect to the device to play with it</div>
       </div>
       <div :class="$style['webble__header--right']">
-        <base-switch v-model="switch1">
-          Lorem ipsum dolor sit amet
-        </base-switch>
+        <base-switch
+          v-model="scanStatus"
+          :color="switchColor"
+        />
       </div>
     </div>
     <div class="webble__content">
       <div :class="$style['webble__content__connected']">
         <h2>Connected devices</h2>
-        <base-device />
+        <base-device :is-connected="true" />
       </div>
       <div :class="$style['webble__content__available']">
         <h2>Available devices</h2>
-        <base-device />
+        <base-device :is-connected="false" />
       </div>
     </div>
-    <button
-      id="show-modal"
-      @click="showModal = true"
-    >
-      Show Modal
-    </button>
-    <!-- use the modal component, pass in the prop -->
-    <base-modal
-      v-if="showModal"
-      @close="showModal = false"
-    >
-      <h3
-        slot="header"
-        :class="$style['device__info__header']"
-      >
-        Device Info
-      </h3>
-      <div
-        slot="body"
-        :class="$style['device__info']"
-      >
-        <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">
-            SSID
-          </div>
-          <div :class="$style['device__info--right']">
-            Device-BBB-19c2
-          </div>
-        </div>
-        <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">
-            Protocol
-          </div>
-          <div :class="$style['device__info--right']">
-            Device-BBB-19c2
-          </div>
-        </div>
-        <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">
-            Security type
-          </div>
-          <div :class="$style['device__info--right']">
-            Device-BBB-19c2
-          </div>
-        </div>
-        <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">
-            IP assignment
-          </div>
-          <div :class="$style['device__info--right']">
-            Device-BBB-19c2
-          </div>
-        </div>
-        <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">
-            Network band
-          </div>
-          <div :class="$style['device__info--right']">
-            Device-BBB-19c2
-          </div>
-        </div>
-        <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">
-            Network chanel
-          </div>
-          <div :class="$style['device__info--right']">
-            9
-          </div>
-        </div>
-        <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">
-            Ip4 address
-          </div>
-          <div :class="$style['device__info--right']">
-            192.168.1.1
-          </div>
-        </div>
-      </div>
-    </base-modal>
   </div>
 </template>
 
 <script>
 import BaseSwitch from './BaseSwitch.vue'
 import BaseDevice from './BaseDevice.vue'
-import BaseModal from './BaseModal.vue'
+
 export default {
   name: 'VueWebble',
   components: {
     BaseSwitch,
-    BaseModal,
     BaseDevice
   },
   props: {
@@ -121,12 +41,18 @@ export default {
     // all | services | name
     filterType: {
       type: String,
-      required: true
+      required: false,
+      default () {
+        return ''
+      }
     },
     // Should be one of services in https://www.bluetooth.com/specifications/gatt/services
     services: {
       type: Array,
-      required: true
+      required: false,
+      default () {
+        return []
+      }
     },
     // The device name being advertised with the name filters key
     name: {
@@ -141,10 +67,9 @@ export default {
     return {
       scannedDevices: [],
       connectedDevices: [],
-      switch1: true,
-      showModal: false
+      scanStatus: false,
+      switchColor: '#2D9FEE'
     }
-    
   },
   created() {
   },
@@ -261,28 +186,5 @@ export default {
 }
 .webble__content__connected {
   margin-bottom: 60px;
-}
-.device__info__header {
-  font-size: 16px;
-  color: #333;
-  font-weight: normal;
-  margin-bottom: 60px;
-}
-.device__info {
-  display: flex;
-  flex-flow: column wrap;
-  .device__info__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    .device__info--left {
-      font-size: 13px;
-    }
-    .device__info--right {
-      font-size: 13px;
-      color: #51ADED;
-    }
-  }
 }
 </style>
