@@ -4,72 +4,116 @@
     <h1>Vue Webble plugin</h1>
     <div :class="$style['webble__header']">
       <div :class="$style['webble__header--left']">
-        <h2>Connected devices</h2>
+        <h2>Bluetooth devices</h2>
         <div>You have to be connect to the device to play with it</div>
       </div>
       <div :class="$style['webble__header--right']">
-        <switch-button v-model="switch1">
+        <base-switch v-model="switch1">
           Lorem ipsum dolor sit amet
-        </switch-button>
+        </base-switch>
       </div>
     </div>
     <div class="webble__content">
       <div :class="$style['webble__content__connected']">
         <h2>Connected devices</h2>
-        <BaseDevice />
+        <base-device />
       </div>
       <div :class="$style['webble__content__available']">
         <h2>Available devices</h2>
-        <BaseDevice />
+        <base-device />
       </div>
     </div>
-    <button id="show-modal" @click="showModal = true">Show Modal</button>
+    <button
+      id="show-modal"
+      @click="showModal = true"
+    >
+      Show Modal
+    </button>
     <!-- use the modal component, pass in the prop -->
-    <modal v-if="showModal" @close="showModal = false">
-      <h3 slot="header" :class="$style['device__info__header']">Device Info</h3>
-      <div slot="body" :class="$style['device__info']">
+    <base-modal
+      v-if="showModal"
+      @close="showModal = false"
+    >
+      <h3
+        slot="header"
+        :class="$style['device__info__header']"
+      >
+        Device Info
+      </h3>
+      <div
+        slot="body"
+        :class="$style['device__info']"
+      >
         <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">SSID</div>
-          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+          <div :class="$style['device__info--left']">
+            SSID
+          </div>
+          <div :class="$style['device__info--right']">
+            Device-BBB-19c2
+          </div>
         </div>
         <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">Protocol</div>
-          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+          <div :class="$style['device__info--left']">
+            Protocol
+          </div>
+          <div :class="$style['device__info--right']">
+            Device-BBB-19c2
+          </div>
         </div>
         <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">Security type</div>
-          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+          <div :class="$style['device__info--left']">
+            Security type
+          </div>
+          <div :class="$style['device__info--right']">
+            Device-BBB-19c2
+          </div>
         </div>
         <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">IP assignment</div>
-          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+          <div :class="$style['device__info--left']">
+            IP assignment
+          </div>
+          <div :class="$style['device__info--right']">
+            Device-BBB-19c2
+          </div>
         </div>
         <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">Network band</div>
-          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+          <div :class="$style['device__info--left']">
+            Network band
+          </div>
+          <div :class="$style['device__info--right']">
+            Device-BBB-19c2
+          </div>
         </div>
         <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">Network chanel</div>
-          <div :class="$style['device__info--right']">9</div>
+          <div :class="$style['device__info--left']">
+            Network chanel
+          </div>
+          <div :class="$style['device__info--right']">
+            9
+          </div>
         </div>
         <div :class="$style['device__info__item']">
-          <div :class="$style['device__info--left']">Ip4 address</div>
-          <div :class="$style['device__info--right']">192.168.1.1</div>
+          <div :class="$style['device__info--left']">
+            Ip4 address
+          </div>
+          <div :class="$style['device__info--right']">
+            192.168.1.1
+          </div>
         </div>
       </div>
-    </modal>
+    </base-modal>
   </div>
 </template>
 
 <script>
 import BaseSwitch from './BaseSwitch.vue'
 import BaseDevice from './BaseDevice.vue'
-import DeviceModal from './DeviceModal.vue'
+import BaseModal from './BaseModal.vue'
 export default {
   name: 'VueWebble',
   components: {
-    'switch-button': BaseSwitch,
-    'modal': DeviceModal,
+    BaseSwitch,
+    BaseModal,
     BaseDevice
   },
   props: {

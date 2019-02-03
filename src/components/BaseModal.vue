@@ -3,7 +3,6 @@
     <div :class="$style['modal-mask']">
       <div :class="$style['modal-wrapper']">
         <div :class="$style['modal-container']">
-
           <div :class="$style['modal-header']">
             <slot name="header">
               Custom Header
@@ -18,8 +17,11 @@
 
           <div :class="$style['modal-footer']">
             <slot name="footer">
-              <button :class="$style['modal-default-button']" @click="$emit('close')">
-                Cancle
+              <button 
+                :class="$style['modal-default-button']"
+                @click="$emit('close')"
+              >
+                Cancel
               </button>
             </slot>
           </div>

@@ -2,12 +2,13 @@
   <div :class="$style['switch-button-control']">
     <div
       :class="[{enabled: isEnabled}, $style.switch-button]"
-			@click="toggle"
-			:style="{'--color': color}">
-      <div :class="$style['button']"></div>
+      @click="toggle"
+      :style="{'--color': color}"
+    >
+      <div :class="$style['button']" />
     </div>
     <div :class="$style['switch-button-label']">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
