@@ -1,13 +1,12 @@
 <template id="switch-button">
-  <div class="switch-button-control">
+  <div :class="$style['switch-button-control']">
     <div
-			class="switch-button"
-			:class="{ enabled: isEnabled }"
+      :class="[{enabled: isEnabled}, $style.switch-button]"
 			@click="toggle"
 			:style="{'--color': color}">
-      <div class="button"/>
+      <div :class="$style['button']"></div>
     </div>
-    <div class="switch-button-label">
+    <div :class="$style['switch-button-label']">
       <slot/>
     </div>
   </div>
@@ -35,24 +34,9 @@ export default {
     }
   }
 }
-
 </script>
 
 <style lang="scss" module>
-// For pen only
-#app {
-  font-family: Lato, sans-serif;
-  
-  .switch-button {
-    margin: 10px 0;
-  }
-  
-  .bottom-message {
-    margin-top: 20px;
-    font-size: 125%;
-  }
-}
-
 // For switch-button styling
 .switch-button-control {
   display: flex;

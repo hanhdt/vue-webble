@@ -1,23 +1,24 @@
 <template>
-  <div>
+  <!-- :class="$style['class']" -->
+  <div :class="$style['webble__container']">
     <h1>Vue Webble plugin</h1>
-    <div class="webble__header">
-      <div class="webble__header--left">
+    <div :class="$style['webble__header']">
+      <div :class="$style['webble__header--left']">
         <h2>Connected devices</h2>
         <div>You have to be connect to the device to play with it</div>
       </div>
-      <div class="webble__header--right">
+      <div :class="$style['webble__header--right']">
         <switch-button v-model="switch1">
           Lorem ipsum dolor sit amet
         </switch-button>
       </div>
     </div>
     <div class="webble__content">
-      <div class="webble__content__connected">
+      <div :class="$style['webble__content__connected']">
         <h2>Connected devices</h2>
         <BaseDevice />
       </div>
-      <div class="webble__content__available">
+      <div :class="$style['webble__content__available']">
         <h2>Available devices</h2>
         <BaseDevice />
       </div>
@@ -25,17 +26,42 @@
     <button id="show-modal" @click="showModal = true">Show Modal</button>
     <!-- use the modal component, pass in the prop -->
     <modal v-if="showModal" @close="showModal = false">
-      <!--
-        you can use custom content here to overwrite
-        default content
-      -->
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header" :class="$style['device__info__header']">Device Info</h3>
+      <div slot="body" :class="$style['device__info']">
+        <div :class="$style['device__info__item']">
+          <div :class="$style['device__info--left']">SSID</div>
+          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+        </div>
+        <div :class="$style['device__info__item']">
+          <div :class="$style['device__info--left']">Protocol</div>
+          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+        </div>
+        <div :class="$style['device__info__item']">
+          <div :class="$style['device__info--left']">Security type</div>
+          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+        </div>
+        <div :class="$style['device__info__item']">
+          <div :class="$style['device__info--left']">IP assignment</div>
+          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+        </div>
+        <div :class="$style['device__info__item']">
+          <div :class="$style['device__info--left']">Network band</div>
+          <div :class="$style['device__info--right']">Device-BBB-19c2</div>
+        </div>
+        <div :class="$style['device__info__item']">
+          <div :class="$style['device__info--left']">Network chanel</div>
+          <div :class="$style['device__info--right']">9</div>
+        </div>
+        <div :class="$style['device__info__item']">
+          <div :class="$style['device__info--left']">Ip4 address</div>
+          <div :class="$style['device__info--right']">192.168.1.1</div>
+        </div>
+      </div>
     </modal>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import BaseSwitch from './BaseSwitch.vue'
 import BaseDevice from './BaseDevice.vue'
 import DeviceModal from './DeviceModal.vue'
@@ -160,4 +186,59 @@ export default {
 
 <style lang="scss" module>
 @import url('../design/index.scss');
+.webble__container {
+  max-width: 640px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.webble__header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  &--left {
+    h2 {
+      text-align: left;
+      margin-bottom: 10px;
+    }
+  }
+}
+.webble__content__connected,
+.webble__content__available {
+  h2 {
+    text-align: left;
+    font-size: 16px;
+    font-weight: normal;
+    color: #777;
+  }
+}
+.webble__content__connected {
+  margin-bottom: 60px;
+}
+.device__info__header {
+  font-size: 16px;
+  color: #333;
+  font-weight: normal;
+  margin-bottom: 60px;
+}
+.device__info {
+  display: flex;
+  flex-flow: column wrap;
+  .device__info__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    .device__info--left {
+      font-size: 13px;
+    }
+    .device__info--right {
+      font-size: 13px;
+      color: #51ADED;
+    }
+  }
+}
 </style>

@@ -1,26 +1,25 @@
 <template id="modal-template">
   <transition name="modal">
-    <div :class="$style.modal-mask">
-      <div :class="$style.modal-wrapper">
-        <div :class="$style.modal-container">
+    <div :class="$style['modal-mask']">
+      <div :class="$style['modal-wrapper']">
+        <div :class="$style['modal-container']">
 
-          <div :class="$style.modal-header">
+          <div :class="$style['modal-header']">
             <slot name="header">
-              default header
+              Custom Header
             </slot>
           </div>
 
-          <div :class="$style.modal-body">
+          <div :class="$style['modal-body']">
             <slot name="body">
-              default body
+              Custom Body
             </slot>
           </div>
 
-          <div :class="$style.modal-footer">
+          <div :class="$style['modal-footer']">
             <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
+              <button :class="$style['modal-default-button']" @click="$emit('close')">
+                Cancle
               </button>
             </slot>
           </div>
@@ -31,6 +30,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   name: 'DeviceModal',
 }
@@ -67,7 +67,8 @@ export default {
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  color: #555;
+  font-size: 20px;
 }
 
 .modal-body {
@@ -75,17 +76,22 @@ export default {
 }
 
 .modal-default-button {
-  float: right;
+  display: inline-block;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 15px;
+  margin: 0;
+  text-decoration: none;
+  color: #555;
+  font-family: sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, 
+  transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter {
   opacity: 0;
