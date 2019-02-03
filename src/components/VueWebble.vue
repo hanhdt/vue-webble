@@ -1,21 +1,49 @@
 <template>
   <div>
     <h1>Vue Webble plugin</h1>
-    <BaseSwitch />
-    <h2>Connected devices</h2>
-    <BaseDevice />
-    <h2>Available devices</h2>
-    <BaseDevice />
+    <div class="webble__header">
+      <div class="webble__header--left">
+        <h2>Connected devices</h2>
+        <div>You have to be connect to the device to play with it</div>
+      </div>
+      <div class="webble__header--right">
+        <switch-button v-model="switch1">
+          Lorem ipsum dolor sit amet
+        </switch-button>
+      </div>
+    </div>
+    <div class="webble__content">
+      <div class="webble__content__connected">
+        <h2>Connected devices</h2>
+        <BaseDevice />
+      </div>
+      <div class="webble__content__available">
+        <h2>Available devices</h2>
+        <BaseDevice />
+      </div>
+    </div>
+    <button id="show-modal" @click="showModal = true">Show Modal</button>
+    <!-- use the modal component, pass in the prop -->
+    <modal v-if="showModal" @close="showModal = false">
+      <!--
+        you can use custom content here to overwrite
+        default content
+      -->
+      <h3 slot="header">custom header</h3>
+    </modal>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import BaseSwitch from './BaseSwitch.vue'
 import BaseDevice from './BaseDevice.vue'
+import DeviceModal from './DeviceModal.vue'
 export default {
   name: 'VueWebble',
   components: {
-    BaseSwitch,
+    'switch-button': BaseSwitch,
+    'modal': DeviceModal,
     BaseDevice
   },
   props: {
@@ -42,8 +70,11 @@ export default {
   data() {
     return {
       scannedDevices: [],
-      connectedDevices: []
+      connectedDevices: [],
+      switch1: true,
+      showModal: false
     }
+    
   },
   created() {
   },
