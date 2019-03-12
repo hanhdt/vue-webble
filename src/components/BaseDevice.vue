@@ -107,43 +107,39 @@ export default {
 .btn__connect,
 .btn__disconnect {
   display: inline-block;
+  margin: 0;
+  padding: 8px 15px;
   border: none;
   border-radius: 30px;
-  padding: 8px 15px;
-  margin: 0;
   text-decoration: none;
   color: #ffffff;
   font-family: sans-serif;
   font-size: 13px;
   cursor: pointer;
   text-align: center;
-  transition: background 250ms ease-in-out, 
+  transition: background-color 250ms ease-in-out, 
   transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
+  &:focus {
+    outline: none;
+    outline-offset: 0;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
 }
 .btn__connect {
-  background: #51ADED;
+  background-color: #51ADED;
+  &:hover, &:focus {
+    background-color: #2D9FEE;
+  }
 }
 .btn__disconnect {
-  background: #ED5153;
-}
-.btn__connect:hover,
-.btn__connect:focus {
-  background: #2D9FEE;
-}
-.btn__disconnect:hover,
-.btn__disconnect:focus {
-  background: #E14043;
-}
-.btn__connect:focus,
-.btn__disconnect:focus {
-  outline: none;
-  outline-offset: 0;
-}
-.btn__connect:active,
-.btn__disconnect:active {
-  transform: scale(0.99);
+  background-color: #ED5153;
+  &:hover, &:focus {
+    background-color: #E14043;
+  }
 }
 .btn__info {
   display: inline-block;
@@ -159,7 +155,7 @@ export default {
   font-size: 13px;
   cursor: pointer;
   text-align: center;
-  background: transparent;
+  background-color: transparent;
   transition: background 250ms ease-in-out, 
   transform 150ms ease;
   -webkit-appearance: none;
@@ -180,7 +176,7 @@ export default {
   }
   &:hover,
   &:focus {
-    background: transparent;
+    background-color: transparent;
   }
   &:focus {
     outline: none;
