@@ -20,8 +20,6 @@ const plugin = {
 	}
 }
 
-export default plugin
-
 // Auto-install
 let GlobalVue = null
 if (typeof window !== 'undefined') {
@@ -32,3 +30,5 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
 	GlobalVue.use(plugin)
 }
+
+export default plugin
