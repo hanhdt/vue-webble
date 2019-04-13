@@ -1,7 +1,9 @@
 <template>
   <div :class="$style.modal__wrapper">
-    <div :class="$style.modal__mask" @click="$emit('close')">
-    </div>
+    <div
+      :class="$style.modal__mask"
+      @click="$emit('close')"
+    />
     <div :class="$style.modal__container">
       <div :class="$style.modal__header">
         <h3

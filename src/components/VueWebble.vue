@@ -9,6 +9,7 @@
       <div :class="$style['webble__header--right']">
         <base-switch
           v-model="scanStatus"
+          :is-enabled="scanStatus"
           :color="switchColor"
         />
       </div>
@@ -27,11 +28,17 @@
 </template>
 
 <script>
+import EmitConnectedDevices from '../mixins/EmitConnectedDevices.js'
+import EmitScannedDevices from '../mixins/EmitScannedDevices.js'
 import BaseSwitch from './BaseSwitch.vue'
 import BaseDevice from './BaseDevice.vue'
 
 export default {
   name: 'VueWebble',
+  mixins: [
+    EmitScannedDevices(),
+    EmitConnectedDevices()
+  ],
   components: {
     BaseSwitch,
     BaseDevice
@@ -55,7 +62,7 @@ export default {
       }
     },
     // The device name being advertised with the name filters key
-    name: {
+    deviceName: {
       type: String,
       required: false,
       default () {
@@ -65,8 +72,8 @@ export default {
   },
   data() {
     return {
-      scannedDevices: [],
-      connectedDevices: [],
+      scannedDevices: null,
+      connectedDevices: null,
       scanStatus: false,
       switchColor: '#2D9FEE'
     }
@@ -76,6 +83,19 @@ export default {
   mounted() {
   },
   methods: {
+    handleRequestDevices(statusVal) {
+      if (statusVal) {
+        this.requestDevice()
+      } else {
+        console.log('Turned off BLE scanning')
+        this.scannedDevices = null
+        this.connectedDevices = null
+      }
+    },
+    handleScannedDevicesChange(devices) {
+      console.log('Scanned devices:', devices)
+      this.emitScannedDevices(devices)
+    },
     // Scan devices
     async requestDevice() {
       // Reset scanned devices
@@ -88,9 +108,12 @@ export default {
               acceptAllDevices: true,
               optionalServices: this.services
             })
+            console.log('Scanned:', JSON.stringify(device))
             this.scannedDevices.push(device)
           } catch(error) { 
-            console.log(error)
+            console.error(error.message)
+            this.scanStatus = false
+            this.scannedDevices = null
           }
           break
         case 'services':
@@ -100,9 +123,12 @@ export default {
                 services: this.services
               }]
             })
+            console.log('Scanned:', JSON.stringify(device))
             this.scannedDevices.push(device)
           } catch(error) {
-            console.log(error)
+            console.error(error.message)
+            this.scanStatus = false
+            this.scannedDevices = null
           }
           break
         case 'name':
@@ -114,10 +140,14 @@ export default {
             })
             this.scannedDevices.push(device)
           } catch(error) {
-            console.log(error)
+            console.error(error)
+            this.scanStatus = false
+            this.scannedDevices = null
           }
           break
         default:
+          this.scanStatus = false
+          this.scannedDevices = null
           break
       }
     },
@@ -142,12 +172,15 @@ export default {
   },
   watch: {
     scannedDevices: {
-      handler: 'emitScannedDevices',
+      handler: 'handleScannedDevicesChange',
       deep: true
     },
     connectedDevices: {
       handler: 'emitConnectDevices',
       deep: true
+    },
+    scanStatus: {
+      handler: 'handleRequestDevices'
     }
   }
 }

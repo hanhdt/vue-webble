@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
-    <VueWebble />
+    <VueWebble
+      filter-type="all"
+    />
   </div>
 </template>
 
@@ -10,6 +12,13 @@ export default {
   name: 'BLEDemo',
   components: {
     VueWebble
+  },
+  data() {
+    return {
+      services: [
+        'device_information'
+      ]
+    }
   }
 }
 </script>
