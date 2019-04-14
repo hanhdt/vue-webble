@@ -9,7 +9,7 @@
         <h3
           :class="$style.device__info__header"
         >
-          Device details
+          Device information
         </h3>
       </div>
 
@@ -19,42 +19,26 @@
         >
           <div :class="$style.device__info__item">
             <div :class="$style.device__info__left">
-              SSID
+              Id
             </div>
             <div :class="$style.device__info__right">
-              Device-BBB-19c2
+              {{ this.device.id }}
             </div>
           </div>
           <div :class="$style.device__info__item">
             <div :class="$style.device__info__left">
-              Protocol
+              Name
             </div>
             <div :class="$style.device__info__right">
-              Device-BBB-19c2
+              {{ this.device.name }}
             </div>
           </div>
           <div :class="$style.device__info__item">
             <div :class="$style.device__info__left">
-              Security type
+              Status
             </div>
             <div :class="$style.device__info__right">
-              Device-BBB-19c2
-            </div>
-          </div>
-          <div :class="$style.device__info__item">
-            <div :class="$style.device__info__left">
-              IP assignment
-            </div>
-            <div :class="$style.device__info__right">
-              Device-BBB-19c2
-            </div>
-          </div>
-          <div :class="$style.device__info__item">
-            <div :class="$style.device__info__left">
-              Network band
-            </div>
-            <div :class="$style.device__info__right">
-              Device-BBB-19c2
+              {{ this.device.connected }}
             </div>
           </div>
         </div>
@@ -77,6 +61,12 @@
 <script>
 export default {
   name: 'DeviceModal',
+  props: {
+    device: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 

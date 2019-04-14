@@ -1,11 +1,11 @@
 <template>
-  <div :class="$style.device__list">
+  <div>
     <div :class="$style.device__item">
       <div :class="$style.device__name">
-        Device 1 - 3G
+        {{ this.device.name }}
       </div>
       <div
-        v-if="isConnected"
+        v-if="this.device.connected"
         :class="$style.device__btn"
       >
         <button
@@ -58,6 +58,7 @@
     <base-modal
       v-show="showDeviceInfo"
       @close="showDeviceInfo = false"
+      :device="device"
     />
   </div>
 </template>
@@ -71,8 +72,8 @@ export default {
   },
   name: 'BaseDevice',
   props: {
-    isConnected: {
-      type: Boolean,
+    device: {
+      type: Object,
       required: true
     }
   },
@@ -85,10 +86,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.device__list {
-  display: flex;
-  flex-flow: column wrap;
-}
+
 .device__item {
   display: flex;
   align-items: center;

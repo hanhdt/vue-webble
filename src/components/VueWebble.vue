@@ -14,14 +14,22 @@
         />
       </div>
     </div>
-    <div class="webble__content">
+    <div :class="$style.webble__content">
       <div :class="$style['webble__content__connected']">
-        <h2>Connected devices</h2>
-        <base-device :is-connected="true" />
+        <h2>Connected devices:</h2>
+        <base-device
+          :is-connected="true"
+          :device="{ id: 'KlcL/2cfS0voOfD+F7J7vgkf', name: 'Device 2', connected: true }"
+        />
       </div>
       <div :class="$style['webble__content__available']">
-        <h2>Available devices</h2>
-        <base-device :is-connected="false" />
+        <h2>Available devices:</h2>
+        <div :class="$style.device__list">
+          <base-device
+            :is-connected="false"
+            :device="{ id: 'KlcL/2cfS0voOfD+F7J7vg==', name: 'Device 1', connected: false }"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -77,10 +85,6 @@ export default {
       scanStatus: false,
       switchColor: '#2D9FEE'
     }
-  },
-  created() {
-  },
-  mounted() {
   },
   methods: {
     handleRequestDevices(statusVal) {
@@ -188,36 +192,43 @@ export default {
 
 <style lang="scss" module>
 @import url('../design/index.scss');
+
 .webble__container {
   max-width: 640px;
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-}
-.webble__header {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 60px;
-  &--left {
-    h2 {
-      text-align: left;
-      margin-bottom: 10px;
+  .webble__header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    &--left {
+      h2 {
+        text-align: left;
+        margin-bottom: 10px;
+      }
     }
   }
-}
-.webble__content__connected,
-.webble__content__available {
-  h2 {
-    text-align: left;
-    font-size: 16px;
-    font-weight: normal;
-    color: #777;
+  .webble__content {
+    .webble__content__connected,
+    .webble__content__available {
+      h2 {
+        text-align: left;
+        font-size: 16px;
+        font-weight: normal;
+        color: #777;
+      }
+    }
+    .webble__content__connected {
+      margin-bottom: 60px;
+      .device__list {
+        display: flex;
+        flex-flow: column wrap;
+      }
+    }
   }
-}
-.webble__content__connected {
-  margin-bottom: 60px;
 }
 </style>
