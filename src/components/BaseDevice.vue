@@ -100,7 +100,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .device__item {
   display: flex;
   align-items: center;
@@ -124,6 +123,7 @@ export default {
   border: none;
   border-radius: 30px;
   text-decoration: none;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   color: #ffffff;
   font-family: sans-serif;
   font-size: 13px;
