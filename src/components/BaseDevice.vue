@@ -5,7 +5,7 @@
         {{ this.device.name }}
       </div>
       <div
-        v-if="this.device.connected"
+        v-if="this.device.gatt.connected"
         :class="$style.device__btn"
       >
         <button

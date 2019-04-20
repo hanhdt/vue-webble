@@ -38,7 +38,7 @@
               Status
             </div>
             <div :class="$style.device__info__right">
-              {{ this.device.connected }}
+              {{ this.device.connected ? 'Connected' : 'Disconnected' }}
             </div>
           </div>
         </div>

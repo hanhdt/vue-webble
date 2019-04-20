@@ -18,16 +18,18 @@
       <div :class="$style['webble__content__connected']">
         <h2>Connected devices:</h2>
         <base-device
-          :is-connected="true"
-          :device="{ id: 'KlcL/2cfS0voOfD+F7J7vgkf', name: 'Device 2', connected: true }"
+          v-for="connectedDevice in this.connectedDevices"
+          :key="connectedDevice.id"
+          :device="connectedDevice"
         />
       </div>
       <div :class="$style['webble__content__available']">
         <h2>Available devices:</h2>
         <div :class="$style.device__list">
           <base-device
-            :is-connected="false"
-            :device="{ id: 'KlcL/2cfS0voOfD+F7J7vg==', name: 'Device 1', connected: false }"
+            v-for="scannedDevice in this.scannedDevices"
+            :key="scannedDevice.id"
+            :device="scannedDevice"
           />
         </div>
       </div>
@@ -87,7 +89,7 @@ export default {
     }
   },
   methods: {
-    handleRequestDevices(statusVal) {
+    handleRequestScanning(statusVal) {
       if (statusVal) {
         this.requestDevice()
       } else {
@@ -112,7 +114,7 @@ export default {
               acceptAllDevices: true,
               optionalServices: this.services
             })
-            console.log('Scanned:', JSON.stringify(device))
+            console.log('All Scanned:', device)
             this.scannedDevices.push(device)
           } catch(error) { 
             console.error(error.message)
@@ -127,7 +129,7 @@ export default {
                 services: this.services
               }]
             })
-            console.log('Scanned:', JSON.stringify(device))
+            console.log('Service Scanned:', JSON.stringify(device))
             this.scannedDevices.push(device)
           } catch(error) {
             console.error(error.message)
@@ -184,7 +186,7 @@ export default {
       deep: true
     },
     scanStatus: {
-      handler: 'handleRequestDevices'
+      handler: 'handleRequestScanning'
     }
   }
 }

@@ -2,6 +2,7 @@
   <div class="hello">
     <VueWebble
       filter-type="all"
+      :services="this.services"
     />
   </div>
 </template>
