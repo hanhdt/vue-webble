@@ -3,8 +3,8 @@
     <h1>Vue Webble plugin</h1>
     <div :class="$style.webble__header">
       <div :class="$style['webble__header--left']">
-        <h2>Bluetooth devices</h2>
-        <div>You have to be connect to the device to play with it</div>
+        <h2>Bluetooth BLE devices</h2>
+        <div>You have to be connect to the device before play with it</div>
       </div>
       <div :class="$style['webble__header--right']">
         <base-switch
@@ -21,6 +21,7 @@
           v-for="connectedDevice in this.connectedDevices"
           :key="connectedDevice.id"
           :device="connectedDevice"
+          @disconnect-device="disconnectDevice"
         />
       </div>
       <div :class="$style['webble__content__available']">
@@ -30,6 +31,7 @@
             v-for="scannedDevice in this.scannedDevices"
             :key="scannedDevice.id"
             :device="scannedDevice"
+            @connect-device="connectDevice"
           />
         </div>
       </div>
@@ -82,8 +84,8 @@ export default {
   },
   data() {
     return {
-      scannedDevices: null,
-      connectedDevices: null,
+      scannedDevices: [],
+      connectedDevices: [],
       scanStatus: false,
       switchColor: '#2D9FEE'
     }
@@ -91,15 +93,19 @@ export default {
   methods: {
     handleRequestScanning(statusVal) {
       if (statusVal) {
+        console.log('> Start scanning...')
         this.requestDevice()
       } else {
-        console.log('Turned off BLE scanning')
-        this.scannedDevices = null
-        this.connectedDevices = null
+        console.log('> Turned off Bluetooth BLE.')
+        this.scannedDevices = []
+        for (let deviceIndex = 0; deviceIndex < this.connectedDevices.length; deviceIndex++) {
+          const device = this.connectedDevices[deviceIndex]
+          device.gatt.disconnect()
+        }
+        this.connectedDevices = []
       }
     },
     handleScannedDevicesChange(devices) {
-      console.log('Scanned devices:', devices)
       this.emitScannedDevices(devices)
     },
     // Scan devices
@@ -119,7 +125,7 @@ export default {
           } catch(error) { 
             console.error(error.message)
             this.scanStatus = false
-            this.scannedDevices = null
+            this.scannedDevices = []
           }
           break
         case 'services':
@@ -129,12 +135,11 @@ export default {
                 services: this.services
               }]
             })
-            console.log('Service Scanned:', JSON.stringify(device))
             this.scannedDevices.push(device)
           } catch(error) {
             console.error(error.message)
             this.scanStatus = false
-            this.scannedDevices = null
+            this.scannedDevices = []
           }
           break
         case 'name':
@@ -148,31 +153,37 @@ export default {
           } catch(error) {
             console.error(error)
             this.scanStatus = false
-            this.scannedDevices = null
+            this.scannedDevices = []
           }
           break
         default:
           this.scanStatus = false
-          this.scannedDevices = null
+          this.scannedDevices = []
           break
       }
     },
     async connectDevice(device) {
-      if (!this.connectedDevices.includes(device)) {
-        this.connectedDevices.push(device)
-      }
       // Connect the device
       const server = await device.gatt.connect()
+      console.log('Connected device:', device.gatt)
+      if (this.scannedDevices.includes(device) && !this.connectedDevices.includes(device)) {
+        this.scannedDevices.splice(this.scannedDevices.indexOf(device), 1)
+        this.connectedDevices.push(device)
+      }
       return server
     },
     async disconnectDevice(device) {
       if (this.connectedDevices.includes(device)
         && device.gatt.connected) {
         // Disconnect the device
-        await device.gatt.disconnect()
+        const disconnect = await device.gatt.disconnect()
+        console.log('Disconnected device:', device.gatt)
         this.connectedDevices.splice(this.connectedDevices.indexOf(device), 1)
+        if (!this.scannedDevices.includes(device)) {
+          this.scannedDevices.push(device)
+        }
       } else {
-        console.log('> Bluetooth Device is already disconnected');
+        console.log('> Bluetooth device is already disconnected.');
       }
     }
   },

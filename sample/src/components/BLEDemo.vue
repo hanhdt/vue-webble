@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       services: [
-        'device_information'
+        'alert_notification'
       ]
     }
   }

@@ -1,8 +1,9 @@
-/*
-* Vue-Webble index.js
-* Author: tranduchanh.ms@gmail.com
-* Github: https://github.com/hanhdt/vue-webble
-*/
+/**
+ * Vue-Webble index.js
+ * 
+ * @author Hanh D. TRAN <tranduchanh.ms@gmail.com>
+ * Github: https://github.com/hanhdt/vue-webble
+ */
 
 import VueWebble from './components/VueWebble.vue'
 import { initErrorHandling } from './utils/error'

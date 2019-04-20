@@ -38,7 +38,7 @@
               Status
             </div>
             <div :class="$style.device__info__right">
-              {{ this.device.connected ? 'Connected' : 'Disconnected' }}
+              {{ this.device.gatt.connected ? 'Connected' : 'Disconnected' }}
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default {
   name: 'DeviceModal',
   props: {
     device: {
-      type: Object,
+      type: BluetoothDevice,
       required: true
     }
   }
