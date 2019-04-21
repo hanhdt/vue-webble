@@ -1,29 +1,28 @@
 # vue-webble
 
-## Project setup
-```
-npm install
+Web Bluetooth LE UI plugin for Vue.js
+
+## [Demo page](/sample)
+
+![vue webble list](/sample/src/assets/device_list.png)
+
+![vue webble connected list](/sample/src/assets/device_connected.png)
+
+## Features
+
+- Manage Web Bluetooth LE devices reactively via UI
+- Simple, clean and responsive UI component for Web app
+
+## Installation
+
+For NPM
+
+```Shell
+  $npm install --save vue-webble
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Or from YARN
 
-### Compiles and minifies for production
+```Shell
+  $yarn add vue-webble
 ```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
