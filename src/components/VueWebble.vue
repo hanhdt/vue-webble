@@ -14,6 +14,7 @@
       </div>
     </div>
     <div :class="$style.webble__content">
+      <!-- Connected BLE devices -->
       <div :class="$style['webble__content__connected']">
         <h2>Connected devices:</h2>
         <base-device
@@ -23,6 +24,7 @@
           @disconnect-device="disconnectDevice"
         />
       </div>
+      <!-- Avaiable BLE devices -->
       <div :class="$style['webble__content__available']">
         <h2>Available devices:</h2>
         <div :class="$style.device__list">
@@ -169,7 +171,8 @@ export default {
     async connectDevice(device) {
       // Connect the device
       const server = await device.gatt.connect()
-      console.log('Connected device:', device.gatt)
+      // console.log('Connected device:', device.gatt)
+
       if (this.scannedDevices.includes(device) && !this.connectedDevices.includes(device)) {
         this.scannedDevices.splice(this.scannedDevices.indexOf(device), 1)
         this.connectedDevices.push(device)
@@ -181,8 +184,9 @@ export default {
         && device.gatt.connected) {
         // Disconnect the device
         const disconnect = await device.gatt.disconnect()
-        console.log('Disconnected device:', device.gatt)
         this.connectedDevices.splice(this.connectedDevices.indexOf(device), 1)
+        // console.log('Disconnected device:', device.gatt)
+
         if (!this.scannedDevices.includes(device)) {
           this.scannedDevices.push(device)
         }
