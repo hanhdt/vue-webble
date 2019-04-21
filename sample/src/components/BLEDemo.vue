@@ -1,5 +1,6 @@
 <template>
-  <div class="hello">
+  <div class="hello container">
+    <h1>Vue Webble - Web Bluetooth LE plugin</h1>
     <VueWebble
       filter-type="all"
       :services="this.services"

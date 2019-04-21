@@ -5,7 +5,7 @@
 export default function () {
   return {
     methods: {
-      emitConnectDevices(devices) {
+      emitConnectedDevices(devices) {
         this.$emit('connected-devices', devices)
       }
     }

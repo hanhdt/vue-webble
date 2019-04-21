@@ -1,9 +1,8 @@
 <template>
   <div :class="$style.webble__container">
-    <h1>Vue Webble plugin</h1>
     <div :class="$style.webble__header">
       <div :class="$style['webble__header--left']">
-        <h2>Bluetooth BLE devices</h2>
+        <h2>Bluetooth LE devices</h2>
         <div>You have to be connect to the device before play with it</div>
       </div>
       <div :class="$style['webble__header--right']">
@@ -109,7 +108,7 @@ export default {
       this.emitScannedDevices(devices)
     },
     handleConnectedDevicesChange(devices) {
-      this.emitScannedDevices(devices)
+      this.emitConnectedDevices(devices)
     },
     // Scan devices
     async requestDevice() {

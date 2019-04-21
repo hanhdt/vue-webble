@@ -132,6 +132,7 @@ export default {
     font-size: 13px;
     cursor: pointer;
     text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     background-color: transparent;
     transition: background-color 250ms ease-in-out, 
     transform 150ms ease;
