@@ -1,5 +1,5 @@
 /**
- *
+ * Emit connected devices
  * @param {*} component
  */
 export default function () {

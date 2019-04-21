@@ -108,6 +108,9 @@ export default {
     handleScannedDevicesChange(devices) {
       this.emitScannedDevices(devices)
     },
+    handleConnectedDevicesChange(devices) {
+      this.emitScannedDevices(devices)
+    },
     // Scan devices
     async requestDevice() {
       // Reset scanned devices
@@ -120,7 +123,7 @@ export default {
               acceptAllDevices: true,
               optionalServices: this.services
             })
-            console.log('All Scanned:', device)
+
             this.scannedDevices.push(device)
           } catch(error) { 
             console.error(error.message)
@@ -135,6 +138,7 @@ export default {
                 services: this.services
               }]
             })
+
             this.scannedDevices.push(device)
           } catch(error) {
             console.error(error.message)
@@ -149,6 +153,7 @@ export default {
                 name: this.name
               }]
             })
+
             this.scannedDevices.push(device)
           } catch(error) {
             console.error(error)
@@ -193,7 +198,7 @@ export default {
       deep: true
     },
     connectedDevices: {
-      handler: 'emitConnectDevices',
+      handler: 'handleConnectedDevicesChange',
       deep: true
     },
     scanStatus: {

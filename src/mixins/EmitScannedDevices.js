@@ -1,5 +1,5 @@
 /**
- *
+ * Expose scanned devices
  * @param {*} component
  */
 export default function () {

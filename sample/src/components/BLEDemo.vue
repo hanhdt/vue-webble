@@ -3,6 +3,8 @@
     <VueWebble
       filter-type="all"
       :services="this.services"
+      @scanned-devices="handleScannedDevices"
+      @connected-devices="handleConnectedDevices"
     />
   </div>
 </template>
@@ -19,6 +21,14 @@ export default {
       services: [
         'alert_notification'
       ]
+    }
+  },
+  methods: {
+    handleScannedDevices(devices) {
+      console.log('Scanned devices:', devices)
+    },
+    handleConnectedDevices(devices) {
+      console.log('Connected devices:', devices)
     }
   }
 }
