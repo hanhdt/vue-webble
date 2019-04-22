@@ -13,7 +13,7 @@ Web Bluetooth LE UI plugin for Vue.js
 ## Features
 
 - Manage Web Bluetooth LE devices reactively
-- Simple, clean and responsive UI component can integrate to Web app
+- Simple, clean and responsive UI component can be integrated to Web app
 
 ## Installation
 
@@ -30,6 +30,19 @@ Or from YARN
 ```
 
 ## Mount Component
+
+in your component, import the package as a child component.
+
+```Javascript
+import VueWebble from "vue-webble";
+
+export default {
+  // ...
+  components: {
+    VueWebble
+  }
+};
+```
 
 ## Component Usages
 
