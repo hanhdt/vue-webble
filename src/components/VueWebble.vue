@@ -3,7 +3,7 @@
     <div :class="$style.webble__header">
       <div :class="$style['webble__header--left']">
         <h2>Bluetooth LE devices</h2>
-        <div>You have to be connect to the device before play with it</div>
+        <div>You have to be connect to the device before play with it.</div>
       </div>
       <div :class="$style['webble__header--right']">
         <base-switch
@@ -17,23 +17,43 @@
       <!-- Connected BLE devices -->
       <div :class="$style['webble__content__connected']">
         <h2>Connected devices:</h2>
-        <base-device
-          v-for="connectedDevice in this.connectedDevices"
-          :key="connectedDevice.id"
-          :device="connectedDevice"
-          @disconnect-device="disconnectDevice"
-        />
+        <div
+          :class="$style.device__list"
+          v-if="this.connectedDevices.length > 0"
+        >
+          <base-device
+            v-for="connectedDevice in this.connectedDevices"
+            :key="connectedDevice.id"
+            :device="connectedDevice"
+            @disconnect-device="disconnectDevice"
+          />
+        </div>
+        <div
+          :class="$style.device__list"
+          v-else
+        >
+          <span>No devices</span>
+        </div>
       </div>
       <!-- Avaiable BLE devices -->
       <div :class="$style['webble__content__available']">
         <h2>Available devices:</h2>
-        <div :class="$style.device__list">
+        <div
+          :class="$style.device__list"
+          v-if="this.scannedDevices.length > 0"
+        >
           <base-device
             v-for="scannedDevice in this.scannedDevices"
             :key="scannedDevice.id"
             :device="scannedDevice"
             @connect-device="connectDevice"
           />
+        </div>
+        <div
+          :class="$style.device__list"
+          v-else
+        >
+          <span>No devices</span>
         </div>
       </div>
     </div>
@@ -97,7 +117,7 @@ export default {
         console.log('> Start scanning...')
         this.requestDevice()
       } else {
-        console.log('> Turned off Bluetooth BLE.')
+        console.log('> Turned off Bluetooth BLE')
         this.scannedDevices = []
         for (let deviceIndex = 0; deviceIndex < this.connectedDevices.length; deviceIndex++) {
           const device = this.connectedDevices[deviceIndex]
