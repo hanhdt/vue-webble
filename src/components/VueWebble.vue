@@ -268,6 +268,9 @@ export default {
       .device__list {
         display: flex;
         flex-flow: column wrap;
+        span {
+          text-align: start;
+        }
       }
     }
   }
