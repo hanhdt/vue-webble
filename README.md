@@ -46,4 +46,30 @@ export default {
 
 ## Component Usages
 
+Add VueWebble into your single component file
+
+```Javascript
+<template>
+  <!-- ... -->
+  <VueWebble
+    filter-type="all"
+    :services="[
+      'alert_notification'
+    ]"
+    @scanned-devices="handleScannedDevices"
+    @connected-devices="handleConnectedDevices"
+  />
+  <!-- ... -->
+</template>
+```
+
 ## Binding events
+
+The `<VueWebble/>` element emits several events which you can use to observe and respond to changes in component state.
+
+- `@scanned-devices` is fired when BLE scanning is enabled and user accepts to pair to the particular device.
+- `@connected-devices` is fired when one device is connected from scanned devices list.
+
+## Contributing
+
+If you're interested in contributing to Vue-Webble or share your opinions, please consider to submitting a [**pull request**](https://github.com/hanhdt/vue-webble/pulls) or post [**issues**](https://github.com/hanhdt/vue-webble/issues).
