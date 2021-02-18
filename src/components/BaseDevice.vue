@@ -79,6 +79,7 @@ export default {
   name: 'BaseDevice',
   props: {
     device: {
+      // eslint-disable-next-line no-undef
       type: BluetoothDevice,
       required: true
     }
@@ -129,7 +130,7 @@ export default {
   font-size: 13px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 250ms ease-in-out, 
+  transition: background-color 250ms ease-in-out,
   transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -168,7 +169,7 @@ export default {
   cursor: pointer;
   text-align: center;
   background-color: transparent;
-  transition: background 250ms ease-in-out, 
+  transition: background 250ms ease-in-out,
   transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;

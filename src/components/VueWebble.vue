@@ -103,7 +103,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       scannedDevices: [],
       connectedDevices: [],
@@ -112,7 +112,7 @@ export default {
     }
   },
   methods: {
-    handleRequestScanning(statusVal) {
+    handleRequestScanning (statusVal) {
       if (statusVal) {
         console.log('> Start scanning...')
         this.requestDevice()
@@ -126,14 +126,14 @@ export default {
         this.connectedDevices = []
       }
     },
-    handleScannedDevicesChange(devices) {
+    handleScannedDevicesChange (devices) {
       this.emitScannedDevices(devices)
     },
-    handleConnectedDevicesChange(devices) {
+    handleConnectedDevicesChange (devices) {
       this.emitConnectedDevices(devices)
     },
     // Scan devices
-    async requestDevice() {
+    async requestDevice () {
       // Reset scanned devices
       this.scannedDevices = []
 
@@ -146,7 +146,7 @@ export default {
             })
 
             this.scannedDevices.push(device)
-          } catch(error) { 
+          } catch (error) {
             console.error(error.message)
             this.scanStatus = false
             this.scannedDevices = []
@@ -155,13 +155,13 @@ export default {
         case 'services':
           try {
             const device = await navigator.bluetooth.requestDevice({
-              filters: [{ 
+              filters: [{
                 services: this.services
               }]
             })
 
             this.scannedDevices.push(device)
-          } catch(error) {
+          } catch (error) {
             console.error(error.message)
             this.scanStatus = false
             this.scannedDevices = []
@@ -170,13 +170,13 @@ export default {
         case 'name':
           try {
             const device = await navigator.bluetooth.requestDevice({
-              filters: [{ 
+              filters: [{
                 name: this.name
               }]
             })
 
             this.scannedDevices.push(device)
-          } catch(error) {
+          } catch (error) {
             console.error(error)
             this.scanStatus = false
             this.scannedDevices = []
@@ -188,7 +188,7 @@ export default {
           break
       }
     },
-    async connectDevice(device) {
+    async connectDevice (device) {
       // Connect the device
       const server = await device.gatt.connect()
       // console.log('Connected device:', device.gatt)
@@ -199,11 +199,11 @@ export default {
       }
       return server
     },
-    async disconnectDevice(device) {
-      if (this.connectedDevices.includes(device)
-        && device.gatt.connected) {
+    async disconnectDevice (device) {
+      if (this.connectedDevices.includes(device) &&
+        device.gatt.connected) {
         // Disconnect the device
-        const disconnect = await device.gatt.disconnect()
+        await device.gatt.disconnect()
         this.connectedDevices.splice(this.connectedDevices.indexOf(device), 1)
         // console.log('Disconnected device:', device.gatt)
 
@@ -211,7 +211,7 @@ export default {
           this.scannedDevices.push(device)
         }
       } else {
-        console.log('> Bluetooth device is already disconnected.');
+        console.log('> Bluetooth device is already disconnected.')
       }
     }
   },

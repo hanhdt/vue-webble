@@ -19,10 +19,10 @@
 
 <script>
 export default {
-	name: 'BaseSwitch',
+  name: 'BaseSwitch',
   model: {
-    prop: "isEnabled",
-    event: "toggle"
+    prop: 'isEnabled',
+    event: 'toggle'
   },
   props: {
     isEnabled: {
@@ -32,12 +32,12 @@ export default {
     color: {
       type: String,
       required: false,
-      default: "#4D4D4D"
+      default: '#4D4D4D'
     }
   },
   methods: {
-    toggle: function() {
-      this.$emit("toggle", !this.isEnabled);
+    toggle: function () {
+      this.$emit('toggle', !this.isEnabled)
     }
   }
 }

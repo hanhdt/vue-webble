@@ -1,13 +1,12 @@
 /**
  * Vue-Webble index.js
- * 
+ *
  * @author Hanh D. TRAN <tranduchanh.ms@gmail.com>
  * Github: https://github.com/hanhdt/vue-webble
  */
 
 import VueWebble from './components/VueWebble.vue'
 import { initErrorHandling } from './utils/error'
-
 
 function registerComponent (Vue) {
   Vue.component(VueWebble.name, VueWebble)
@@ -16,20 +15,20 @@ function registerComponent (Vue) {
 const plugin = {
   version: '0.1.0',
   install (Vue) {
-		initErrorHandling(Vue)
+    initErrorHandling(Vue)
     registerComponent(Vue)
-	}
+  }
 }
 
 // Auto-install
 let GlobalVue = null
 if (typeof window !== 'undefined') {
-	GlobalVue = window.Vue
+  GlobalVue = window.Vue
 } else if (typeof global !== 'undefined') {
-	GlobalVue = global.Vue
+  GlobalVue = global.Vue
 }
 if (GlobalVue) {
-	GlobalVue.use(plugin)
+  GlobalVue.use(plugin)
 }
 
 export default plugin

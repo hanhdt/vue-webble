@@ -5,7 +5,7 @@
 export default function () {
   return {
     methods: {
-      emitScannedDevices(devices) {
+      emitScannedDevices (devices) {
         this.$emit('scanned-devices', devices)
       }
     }

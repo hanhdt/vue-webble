@@ -46,7 +46,7 @@
 
       <div :class="$style.modal__footer">
         <slot name="footer">
-          <button 
+          <button
             :class="$style.modal__button"
             @click="$emit('close')"
           >
@@ -63,6 +63,7 @@ export default {
   name: 'DeviceModal',
   props: {
     device: {
+      // eslint-disable-next-line no-undef
       type: BluetoothDevice,
       required: true
     }
@@ -134,7 +135,7 @@ export default {
     text-align: center;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     background-color: transparent;
-    transition: background-color 250ms ease-in-out, 
+    transition: background-color 250ms ease-in-out,
     transform 150ms ease;
     -webkit-appearance: none;
     -moz-appearance: none;
