@@ -36,6 +36,9 @@
     "js",
     "javascript"
   ],
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "scripts": {
     "dev": "vue-cli-service serve ./sample/src/main.js --open",
     "build": "vue-cli-service build --target lib --name vue-webble ./src/index.js",
